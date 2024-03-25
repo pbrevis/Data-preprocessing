@@ -13,6 +13,11 @@ rm(list = ls()) # Cleaning my global environment
 fao_df <- read.csv("FAOSTAT_data_en_3-23-2024.csv")
 glimpse(fao_df)
 
+# Making list of unique Elements and Items in 'fao_df'
+print(unique(fao_df$Element))
+print(unique(fao_df$Item))
+
+
 # Reading "countries_ids.csv" file
 countryid_df <- read.csv("countries_ids.csv")
 glimpse(countryid_df)
@@ -30,6 +35,7 @@ n_distinct(fao_df$Area)
 fao_area_names <- unique(fao_df$Area)
 length(fao_area_names)
 head(fao_area_names)
+print(fao_area_names)
 
 # Write list of unique area (country) names into csv
 write.csv(fao_area_names, "fao_area_names.csv")
@@ -47,6 +53,7 @@ n_distinct(countryid_df$entity_id)
 entity_names <- unique(countryid_df$entity_id)
 length(entity_names)
 head(entity_names)
+print(entity_names)
 
 
 ################################################################################
@@ -62,6 +69,7 @@ countryid_df$entity_id2 <- stringr::str_to_title(countryid_df$entity_id2)
 
 # Quick glimpse at dataframe
 glimpse(countryid_df)
+print(countryid_df$entity_id2)
 
 ################################################################################
 ## STEP 4: MERGING DATAFRAMES WITH FUNCTION left_join
@@ -103,6 +111,7 @@ write.csv(countries_missing_label, "output_countries_missing_label.csv")
 # First column with row numbers was dropped
 missing_ids_df <- read.csv("new_countries_ids.csv", colClasses = c("NULL", NA, NA, NA))
 glimpse(missing_ids_df)
+print(missing_ids_df)
 
 # Frequency table of missing values NA
 table(is.na(missing_ids_df$cca3))
